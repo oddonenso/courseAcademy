@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f59a4f862e5641e19c832ffe6f1a3163" Name="Diagram1">
+        <EntityTypeShape EntityType="KinoStudioModel.Actors" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Area" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Gender" Width="1.5" PointX="1.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Movie" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Presidents" Width="1.5" PointX="6" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Role" Width="1.5" PointX="1.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Studios" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoStudioModel.Users" Width="1.5" PointX="3.75" PointY="14.375" IsExpanded="true" />
+        <AssociationConnector Association="KinoStudioModel.FK__Actors__AreaId__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Actors__MovieId__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Actors__StudioId__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Area__StudioId__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Users__GenderId__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Movie__AreaId__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Movie__StudioId__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__President__Studi__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK_Presidents_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoStudioModel.FK__Users__RoleId__4D94879B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

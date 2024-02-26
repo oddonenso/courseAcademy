@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KinoStudioModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="StudioId" Type="int" Nullable="false" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="NameActor" Type="nvarchar" MaxLength="150" />
+          <Property Name="SurnameActor" Type="nvarchar" MaxLength="150" />
+          <Property Name="MidnameActor" Type="nvarchar" MaxLength="150" />
+          <Property Name="Age" Type="nvarchar" MaxLength="150" />
+          <Property Name="SalaryActor" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudioId" Type="int" Nullable="false" />
+          <Property Name="AreaName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderName" Type="nvarchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudioId" Type="int" Nullable="false" />
+          <Property Name="MovieName" Type="nvarchar" MaxLength="150" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="budgetFilm" Type="money" />
+        </EntityType>
+        <EntityType Name="Presidents">
+          <Key>
+            <PropertyRef Name="PresidentId" />
+          </Key>
+          <Property Name="PresidentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudioId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="money" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Studios">
+          <Key>
+            <PropertyRef Name="StudioId" />
+          </Key>
+          <Property Name="StudioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameStudio" Type="nvarchar" MaxLength="100" />
+          <Property Name="FoundingDate" Type="date" />
+          <Property Name="location" Type="nvarchar" MaxLength="150" />
+          <Property Name="AnnualIncome" Type="money" />
+          <Property Name="Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Midname" Type="nvarchar" MaxLength="100" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Actors__AreaId__60A75C0F">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Actors" Type="Self.Actors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Actors">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actors__MovieId__5EBF139D">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Actors" Type="Self.Actors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Actors">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actors__StudioId__5FB337D6">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Actors" Type="Self.Actors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Actors">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Area__StudioId__5812160E">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Area" Type="Self.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Area">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__AreaId__5BE2A6F2">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__StudioId__5AEE82B9">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__President__Studi__5441852A">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Presidents" Type="Self.Presidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Presidents">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__GenderId__4E88ABD4">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__4D94879B">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presidents_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Presidents" Type="Self.Presidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Presidents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KinoStudioModelContainer">
+          <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presidents" EntityType="Self.Presidents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Studios" EntityType="Self.Studios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Actors__AreaId__60A75C0F" Association="Self.FK__Actors__AreaId__60A75C0F">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Actors" EntitySet="Actors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actors__MovieId__5EBF139D" Association="Self.FK__Actors__MovieId__5EBF139D">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Actors" EntitySet="Actors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actors__StudioId__5FB337D6" Association="Self.FK__Actors__StudioId__5FB337D6">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Actors" EntitySet="Actors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Area__StudioId__5812160E" Association="Self.FK__Area__StudioId__5812160E">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Area" EntitySet="Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__AreaId__5BE2A6F2" Association="Self.FK__Movie__AreaId__5BE2A6F2">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__StudioId__5AEE82B9" Association="Self.FK__Movie__StudioId__5AEE82B9">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__President__Studi__5441852A" Association="Self.FK__President__Studi__5441852A">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Presidents" EntitySet="Presidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__GenderId__4E88ABD4" Association="Self.FK__Users__GenderId__4E88ABD4">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__4D94879B" Association="Self.FK__Users__RoleId__4D94879B">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presidents_Users" Association="Self.FK_Presidents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Presidents" EntitySet="Presidents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KinoStudioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="StudioId" Type="Int32" Nullable="false" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <Property Name="NameActor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SurnameActor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="MidnameActor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SalaryActor" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Studios" Relationship="Self.FK__Actors__AreaId__60A75C0F" FromRole="Actors" ToRole="Studios" />
+          <NavigationProperty Name="Studios1" Relationship="Self.FK__Actors__MovieId__5EBF139D" FromRole="Actors" ToRole="Studios" />
+          <NavigationProperty Name="Studios2" Relationship="Self.FK__Actors__StudioId__5FB337D6" FromRole="Actors" ToRole="Studios" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudioId" Type="Int32" Nullable="false" />
+          <Property Name="AreaName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Studios" Relationship="Self.FK__Area__StudioId__5812160E" FromRole="Area" ToRole="Studios" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderId" />
+          </Key>
+          <Property Name="GenderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderName" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__GenderId__4E88ABD4" FromRole="Gender" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudioId" Type="Int32" Nullable="false" />
+          <Property Name="MovieName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <Property Name="budgetFilm" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Studios" Relationship="Self.FK__Movie__AreaId__5BE2A6F2" FromRole="Movie" ToRole="Studios" />
+          <NavigationProperty Name="Studios1" Relationship="Self.FK__Movie__StudioId__5AEE82B9" FromRole="Movie" ToRole="Studios" />
+        </EntityType>
+        <EntityType Name="Presidents">
+          <Key>
+            <PropertyRef Name="PresidentId" />
+          </Key>
+          <Property Name="PresidentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudioId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Studios" Relationship="Self.FK__President__Studi__5441852A" FromRole="Presidents" ToRole="Studios" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Presidents_Users" FromRole="Presidents" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__4D94879B" FromRole="Role" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Studios">
+          <Key>
+            <PropertyRef Name="StudioId" />
+          </Key>
+          <Property Name="StudioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameStudio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FoundingDate" Type="DateTime" Precision="0" />
+          <Property Name="location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AnnualIncome" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Actors" Relationship="Self.FK__Actors__AreaId__60A75C0F" FromRole="Studios" ToRole="Actors" />
+          <NavigationProperty Name="Actors1" Relationship="Self.FK__Actors__MovieId__5EBF139D" FromRole="Studios" ToRole="Actors" />
+          <NavigationProperty Name="Actors2" Relationship="Self.FK__Actors__StudioId__5FB337D6" FromRole="Studios" ToRole="Actors" />
+          <NavigationProperty Name="Area" Relationship="Self.FK__Area__StudioId__5812160E" FromRole="Studios" ToRole="Area" />
+          <NavigationProperty Name="Movie" Relationship="Self.FK__Movie__AreaId__5BE2A6F2" FromRole="Studios" ToRole="Movie" />
+          <NavigationProperty Name="Movie1" Relationship="Self.FK__Movie__StudioId__5AEE82B9" FromRole="Studios" ToRole="Movie" />
+          <NavigationProperty Name="Presidents" Relationship="Self.FK__President__Studi__5441852A" FromRole="Studios" ToRole="Presidents" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Midname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__Users__GenderId__4E88ABD4" FromRole="Users" ToRole="Gender" />
+          <NavigationProperty Name="Presidents" Relationship="Self.FK_Presidents_Users" FromRole="Users" ToRole="Presidents" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleId__4D94879B" FromRole="Users" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK__Actors__AreaId__60A75C0F">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Actors" Type="Self.Actors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Actors">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actors__MovieId__5EBF139D">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Actors" Type="Self.Actors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Actors">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Actors__StudioId__5FB337D6">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Actors" Type="Self.Actors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Actors">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Area__StudioId__5812160E">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Area" Type="Self.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Area">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__GenderId__4E88ABD4">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__AreaId__5BE2A6F2">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__StudioId__5AEE82B9">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__President__Studi__5441852A">
+          <End Role="Studios" Type="Self.Studios" Multiplicity="1" />
+          <End Role="Presidents" Type="Self.Presidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Studios">
+              <PropertyRef Name="StudioId" />
+            </Principal>
+            <Dependent Role="Presidents">
+              <PropertyRef Name="StudioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Presidents_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Presidents" Type="Self.Presidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Presidents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__4D94879B">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KinoStudioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actors" />
+          <EntitySet Name="Area" EntityType="Self.Area" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="Presidents" EntityType="Self.Presidents" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Studios" EntityType="Self.Studios" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Actors__AreaId__60A75C0F" Association="Self.FK__Actors__AreaId__60A75C0F">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Actors" EntitySet="Actors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actors__MovieId__5EBF139D" Association="Self.FK__Actors__MovieId__5EBF139D">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Actors" EntitySet="Actors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Actors__StudioId__5FB337D6" Association="Self.FK__Actors__StudioId__5FB337D6">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Actors" EntitySet="Actors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Area__StudioId__5812160E" Association="Self.FK__Area__StudioId__5812160E">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Area" EntitySet="Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__GenderId__4E88ABD4" Association="Self.FK__Users__GenderId__4E88ABD4">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__AreaId__5BE2A6F2" Association="Self.FK__Movie__AreaId__5BE2A6F2">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__StudioId__5AEE82B9" Association="Self.FK__Movie__StudioId__5AEE82B9">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__President__Studi__5441852A" Association="Self.FK__President__Studi__5441852A">
+            <End Role="Studios" EntitySet="Studios" />
+            <End Role="Presidents" EntitySet="Presidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Presidents_Users" Association="Self.FK_Presidents_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Presidents" EntitySet="Presidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__4D94879B" Association="Self.FK__Users__RoleId__4D94879B">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KinoStudioModelContainer" CdmEntityContainer="KinoStudioEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="KinoStudioModel.Actors">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="NameActor" ColumnName="NameActor" />
+                <ScalarProperty Name="SurnameActor" ColumnName="SurnameActor" />
+                <ScalarProperty Name="MidnameActor" ColumnName="MidnameActor" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="SalaryActor" ColumnName="SalaryActor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="KinoStudioModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gender">
+            <EntityTypeMapping TypeName="KinoStudioModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="GenderName" ColumnName="GenderName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="KinoStudioModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="budgetFilm" ColumnName="budgetFilm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presidents">
+            <EntityTypeMapping TypeName="KinoStudioModel.Presidents">
+              <MappingFragment StoreEntitySet="Presidents">
+                <ScalarProperty Name="PresidentId" ColumnName="PresidentId" />
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="KinoStudioModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Studios">
+            <EntityTypeMapping TypeName="KinoStudioModel.Studios">
+              <MappingFragment StoreEntitySet="Studios">
+                <ScalarProperty Name="StudioId" ColumnName="StudioId" />
+                <ScalarProperty Name="NameStudio" ColumnName="NameStudio" />
+                <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="AnnualIncome" ColumnName="AnnualIncome" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KinoStudioModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Midname" ColumnName="Midname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
